@@ -4,6 +4,7 @@ const MovieSchema = new mongoose.Schema({
   content: String,
   image: String,
   author: String,
+  category:String,
   likedBy: [{ username: String }],
   comments: [
     {

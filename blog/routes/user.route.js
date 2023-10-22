@@ -15,7 +15,7 @@ Router.post("/signup", async (req, res) => {
   res.cookie("role", data.role); // No changes here, setting "role" cookie
   res.cookie("id", data.id, { maxAge: 50000 }); // Setting "id" cookie with a maxAge of 50000 milliseconds
   res.send(`Account created successfully ${data.username}`);
-  console.log(data);
+  
 });
 
 Router.get("/login", (req, res) => {

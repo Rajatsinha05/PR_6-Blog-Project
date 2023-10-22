@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Your Website</title>
+    <style>
+      /* Reset default styles and apply some basic styling */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      /* Style the navigation bar */
+      .navbar {
+        background-color: #333; /* Dark background color */
+        color: white; /* Text color */
+        padding: 20px;
+        margin-bottom: 30px;
+      }
+
+      /* Style the navigation list */
+      .navbar ul {
+        list-style-type: none;
+        display: flex;
+        justify-content: space-evenly; /* Right-align the links */
+        padding: 0;
+      }
+
+      /* Style each navigation item (list item) */
+      .navbar li {
+        margin: 0 15px; /* Add spacing between items */
+      }
+
+      /* Style the links */
+      .navbar a {
+        text-decoration: none;
+        color: white; /* Text color for links */
+        transition: color 0.3s; /* Add a smooth color transition on hover */
+      }
+
+      /* Change link color on hover */
+      .navbar a:hover {
+        color: #007bff; /* Change link color on hover to a different color */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <ul>
+        <li><a href="/blog/">Home</a></li>
+        <li><a href="/blog/create">Add Blogs</a></li>
+        <li><a href="/user/signup">Sign Up</a></li>
+        <li><a href="/user/login">Login</a></li>
+      </ul>
+    </div>
+
+    <!-- Rest of your content goes here -->
+  </body>
+</html>

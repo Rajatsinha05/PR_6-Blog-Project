@@ -101,6 +101,7 @@ describe("User Registration and Login", () => {
     cy.visit(`http://localhost:8090/blog/create`);
     cy.get(`#title`).type("Testing Blog");
     cy.get(`#content`).type(`testing blog for checking its working or not`);
+    cy.get("#category").type("technology");
     cy.get(`#image`).type(
       "https://www.ascian.in/creatives/wp-content/uploads/blog.jpg"
     );
@@ -120,8 +121,6 @@ describe("User Registration and Login", () => {
     });
   });
 
- 
-
   it("should update blog by admin only - marks 1", () => {
     cy.setCookie("role", roleCookie);
     cy.setCookie("id", idCookie);
@@ -133,19 +132,6 @@ describe("User Registration and Login", () => {
       expect(response.status).to.equal(200);
     });
   });
-  // delete
-  it("should delete blog by admin only - marks 1", () => {
-    cy.setCookie("role", roleCookie);
-    cy.setCookie("id", idCookie);
-    console.log(blogId);
-    // Delete the user by ID (assuming you have a separate test for registration)
-    cy.request("DELETE", `http://localhost:8090/blog/delete/${blogId}`).then(
-      (response) => {
-        expect(response.status).to.equal(200);
-      }
-    );
-  });
-
 
   it("should fetch and render blogs", () => {
     cy.setCookie("role", "user");
@@ -162,5 +148,55 @@ describe("User Registration and Login", () => {
         cy.wrap($child).find(".img").should("exist"); // Verify .img class exists
         cy.wrap($child).find(".title").should("exist"); // Verify .title class exists
       });
+  });
+
+  it("should navigate to the last single blog page, check its elements, and verify data", () => {
+    // Visit the page that lists all blogs
+    cy.visit("http://localhost:8090/blog/");
+
+    // Find the last blog entry and click on it
+    // Select the last blog entry
+    cy.get("#parent-box").find(".list").last().click();
+
+    // Check if the URL has changed to the single blog page
+    // cy.url().should("include", "/blog/singleBlog/");
+
+    // Ensure the blog container exists
+    cy.get("#blog").should("exist");
+
+    // Verify the existence of elements on the single blog page
+    cy.get("#img").should("exist");
+    cy.get("#title").should("exist");
+    cy.get("#category").should("exist");
+    cy.get("#content").should("exist");
+    cy.get("#like").should("exist");
+    cy.get("#count").should("exist");
+    cy.get("#comment").should("exist");
+
+    // Check data on the single blog page
+    cy.get("#img")
+      .should("have.attr", "src")
+      .and(
+        "include",
+        "https://www.ascian.in/creatives/wp-content/uploads/blog.jpg"
+      );
+    cy.get("#title").should("have.text", "updated blog title by the tester");
+    cy.get("#category").should("have.text", "technology");
+    cy.get("#content").should(
+      "have.text",
+      "testing blog for checking its working or not"
+    );
+  });
+
+  it("should delete blog by admin only - marks 1", () => {
+    cy.setCookie("role", roleCookie);
+    cy.setCookie("id", idCookie);
+    console.log(blogId);
+    // Delete the user by ID (assuming you have a separate test for registration)
+    cy.request("DELETE", `http://localhost:8090/blog/delete/${blogId}`).then(
+      (response) => {
+        expect(response.status).to.equal(200);
+      }
+    );
   });
 });

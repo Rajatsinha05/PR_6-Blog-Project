@@ -1,7 +1,7 @@
 const isAuth = (req, res, next) => {
   let { role } = req.cookies;
   if (role == "admin") {
-    console.log(role);
+    
     next();
   } else if (!role) {
     res.send("login first");

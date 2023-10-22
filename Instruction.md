@@ -59,6 +59,7 @@ You are tasked with building an API for a Blog. The project should include the f
   content: String,
   image: String,
   author: String,
+  category:String,
   likedBy: [{ username: String }],
   comments: [{
       text: String,
@@ -132,11 +133,12 @@ You are tasked with building an API for a Blog. The project should include the f
 - form (ID `blogForm`)
 - Title (ID: `title`)
 - Content (ID: `content`)
+- category (ID:`category`)
 - Image (ID: `image`)
 
 4. **Set Author's Name:** Retrieve the author's name from cookies.
 
-- make middleware to check title and content image are coming or not if not then send (`All fields are required`)
+- make middleware to check title and content image, category are coming or not if not then send (`All fields are required`)
 
 # - do not use required in form
 
@@ -149,29 +151,28 @@ You are tasked with building an API for a Blog. The project should include the f
 - after send adding blog send response (`blog created by [adminname]`) where `[adminname]` is replaced with the actual adminname
 - set that blog id in cookies give name `blogId`
 
-
 # GET route - Fetch and Render All Blogs
 
 1. Create a GET route at `/blog/blogs`.
-2.  send a response containing all available blogs.
-
+2. send a response containing all available blogs.
 
 ## Render the Blog Page
 
 1. Create a GET route at `/blog/`.
 2. Set up this route to render your blog page.
 3. Display all blogs on the page.
+4. make a proper navbar and add path and include in all page
 
 ## Blog Page Structure
 
 1. Create a div with the ID `parent-box`.
+
    - Inside this div, append all blogs in separate divs with the class `list`.
 
 2. For each blog entry, include the following elements within the `list` div:
    - An image tag with the class `img` to display the blog's image.
    - A paragraph (p) tag with the class `title` to display the blog's title.
 
- 
 ### DELETE route
 
 - Create a DELETE route named `/blog/delete/:id`.
@@ -183,27 +184,48 @@ You are tasked with building an API for a Blog. The project should include the f
 - Send all data after editing blogs.
 - Only admins can edit.
 
+<!-- single blog page  -->
 
+### GET Route with ID
 
-### GET route with ID
+1. Create a GET route at `/blog/singleBlog/:id`.
+2. Send a single blog by its ID.
+3. Use EJS to send and render that blog. Hint:
+   ```js
+   res.render("singleBlogPage", { singleBlog });
+   ```
 
-- Create a GET route at `/blog/singleBlog/:id`.
-- Send a single blog by its ID.
+When a user clicks on a single blog from the page that displays all blogs, the single blog page should be shown. This page should have the following HTML structure:
+
+- `div` with `id=blog`.
+- `img` tag with `id=img` to display the blog's image.
+- `h3` tag for the title with `id=title`.
+- `span` tag for the category with `id=category`.
+- `p` tag for the content with `id=content`.
+- `button` for like `id=like`
+- `span` for displaying number of like `id=count`
+- `form` make form for adding comment `id=comment`
 
 ### Make PATCH route
 
 - Route name `/blog/like/:id`
+- login or signup required for like
+- pass blog id
 - Add a like to the database with the username
+- use cookies to set username
+- that admin can not like there own blog
 - Send that blog
 
 ### Make PATCH route
 
 - Route name `/blog/comment/:id`
+- pass blog id
+- login or signup required for comment
 - Add comments to the database with username and text
+- use cookies to set username
 - Send that blog
 
 ---
-
 
 ---
 

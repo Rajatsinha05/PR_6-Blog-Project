@@ -4,8 +4,58 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      /* Alternative CSS design for list items */
+.list {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    transition: transform 0.2s;
+}
+
+.list:hover {
+    transform: scale(1.02);
+}
+
+.img {
+    max-width: 100px;
+    height: auto;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.title {
+    font-weight: bold;
+    margin: 0;
+    font-size: 18px;
+}
+
+/* Optional: Add space between list items */
+.list + .list {
+    margin-top: 20px;
+}
+
+/* Center the list items horizontally */
+.parent-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Optional: Add space between list items */
+.list + .list {
+    margin-top: 20px;
+}
+
+    </style>
   </head>
   <body>
+<%- include("nav")  %>
+
     <div id="parent-box"></div>
   </body>
   <script>
@@ -21,7 +71,12 @@
           title.setAttribute("class", "title");
           let div = document.createElement("div");
           div.append(img, title);
+          div.setAttribute("class", "list");
           document.getElementById("parent-box").append(div);
+
+          div.addEventListener("click", () => {
+            window.location.href = `/blog/singleblog/${ele._id}`;
+          });
         });
       });
   </script>
