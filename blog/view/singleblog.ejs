@@ -1,144 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-   <style>
-    /* Reset default styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    <style>
+      /* Reset default styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-/* Apply some basic styles to the body */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 0;
-}
+      /* Apply some basic styles to the body */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+      }
 
-/* Style the navigation bar */
-#nav {
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-    text-align: center;
-}
+      /* Style the navigation bar */
+      #nav {
+        background-color: #333;
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+      }
 
-#nav ul {
-    list-style-type: none;
-    padding: 0;
-}
+      #nav ul {
+        list-style-type: none;
+        padding: 0;
+      }
 
-#nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
+      #nav ul li {
+        display: inline;
+        margin: 0 15px;
+      }
 
-#nav ul li a {
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    transition: color 0.3s;
-}
+      #nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+        transition: color 0.3s;
+      }
 
-#nav ul li a:hover {
-    color: #007bff;
-}
+      #nav ul li a:hover {
+        color: #007bff;
+      }
 
-/* Style the blog content */
-#blog {
-    background-color: white;
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
+      /* Style the blog content */
+      #blog {
+        background-color: white;
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
 
-#img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
+      #img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
 
-#title {
-    font-size: 24px;
-    margin: 20px 0;
-    color: #333;
-}
+      #title {
+        font-size: 24px;
+        margin: 20px 0;
+        color: #333;
+      }
 
-#category {
-    font-weight: bold;
-    color: #007bff;
-}
+      #category {
+        font-weight: bold;
+        color: #007bff;
+      }
 
-#content {
-    margin: 20px 0;
-    line-height: 1.6;
-}
+      #content {
+        margin: 20px 0;
+        line-height: 1.6;
+      }
 
-#like {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-bottom: 5px;
-}
+      #like {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-bottom: 5px;
+      }
 
-#like:hover {
-    background-color: #0056b3;
-}
+      #like:hover {
+        background-color: #0056b3;
+      }
 
-#count {
-    margin-left: 10px;
-    color: #333;
-    font-size: 18px;
-}
+      #count {
+        margin-left: 10px;
+        color: #333;
+        font-size: 18px;
+      }
 
-#comment input[type="text"] {
-    width: 80%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
-}
+      #comment input[type="text"] {
+        width: 80%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+      }
 
-#comment button[type="submit"] {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+      #comment button[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
 
-#comment button[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-   </style>
-</head>
-<body>
-    <%- include("nav")  %>
+      #comment button[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("nav") %>
     <div id="blog">
-        <img id="img" src="<%= singleBlog.image %>" alt="<%= singleBlog.title %>">
-        <h3 id="title"><%= singleBlog.title %></h3>
-        <span id="category"><%= singleBlog.category %></span>
-        <p id="content"><%= singleBlog.content %></p>
-        <button id="like">Like</button>
-        <span id="count"><%= singleBlog.likes %></span>
-        <form id="comment" action="/blog/addComment/<%= singleBlog.id %>" method="post">
-            <input type="text" name="comment" placeholder="Add a comment" />
-            <button type="submit">Submit</button>
-        </form>
+      
+      <img
+        id="img"
+        src="<%= singleBlog.image %>"
+        alt="<%= singleBlog.title %>"
+      />
+      <h3 id="title"><%= singleBlog.title %></h3>
+      <span id="category"><%= singleBlog.category %></span>
+      <p id="content"><%= singleBlog.content %></p>
+      <button id="like">Like</button>
+      <span id="count"> <%= singleBlog.likedBy.length %></span>
+      <form
+        id="comment"
+        action="/blog/addComment/<%= singleBlog.id %>"
+        method="post"
+      >
+        <input type="text" name="comment" placeholder="Add a comment" />
+        <button type="submit">Submit</button>
+      </form>
     </div>
-</body>
+  </body>
+  <script>
+    const likeButton = document.getElementById("like");
+    likeButton.addEventListener("click", () => {
+    //   let id = document.getElementById("id").innerHTML;
+      let url= window.location.href.split("/")
+      let id=url[url.length-1]
+      fetch(`/blog/like/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+      }).then(() => {
+        let count = document.getElementById("count").innerHTML;
+
+        document.getElementById("count").innerHTML = Number(count) + 1;
+      });
+    });
+  </script>
 </html>

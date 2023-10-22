@@ -153,7 +153,13 @@ You are tasked with building an API for a Blog. The project should include the f
 
 # GET route - Fetch and Render All Blogs
 
+<!-- mange filters as well -->
+
 1. Create a GET route at `/blog/blogs`.
+
+- if you get category in query then send all related
+  else
+
 2. send a response containing all available blogs.
 
 ## Render the Blog Page
@@ -172,6 +178,17 @@ You are tasked with building an API for a Blog. The project should include the f
 2. For each blog entry, include the following elements within the `list` div:
    - An image tag with the class `img` to display the blog's image.
    - A paragraph (p) tag with the class `title` to display the blog's title.
+
+<!-- optional -->
+
+3. add filter tag if we clicked any then it should be world
+
+- there should be these category present
+- technology
+- sports
+- health
+
+- you can add more
 
 ### DELETE route
 
@@ -211,23 +228,79 @@ When a user clicks on a single blog from the page that displays all blogs, the s
 - Route name `/blog/like/:id`
 - login or signup required for like
 - pass blog id
+- ## hint ; - there are many way to blog id
+  - you can use :
+  ```js
+  let url = window.location.href.split("/");
+  let id = url[url.length - 1];
+  ```
 - Add a like to the database with the username
 - use cookies to set username
-- that admin can not like there own blog
-- Send that blog
+- add event on like button when user hit the like button that time it should work
+- send that whole blog in object
 
 ### Make PATCH route
 
 - Route name `/blog/comment/:id`
 - pass blog id
+- ## hint ; - there are many way to blog id
+  - you can use :
+  ```js
+  let url = window.location.href.split("/");
+  let id = url[url.length - 1];
+  ```
 - login or signup required for comment
 - Add comments to the database with username and text
 - use cookies to set username
 - Send that blog
+- you can added by ui or only make logic
 
----
+<!-- flexible searching features -->
 
----
+1. Set up a new GET route `/blog/search` in your Express.js application.
+
+2. Extract the search query from the request query parameters (`req.query.blogs`).
+3. Implement flexible search logic to handle different types of queries (e.g., title, author, category).
+4. Search in your blog data for matches in categories, authors, and titles, based on the search query.
+
+5. To handle wrong spellings or approximate matches, consider using a library like "fuzzy" or "string-similarity" to compare the search query to existing data. This allows you to find close matches, even with misspelled words.
+
+6. Return the search results, including any approximate matches, as JSON in the response.
+
+<!-- hint use fuse.js || fuzzy.js  -->
+
+```js
+npm  i fuse.js
+
+const Fuse = require("fuse.js");
+blog.get(`/blog/search`,(req,res)=>{
+
+let query = req.query.blogs;
+  const blogs = await blog.find();
+
+  const options = {
+    keys: ["author", "category", "title"],
+  };
+  const fuse = new Fuse(blogs, options);
+  const result = fuse.search(query);
+
+})
+
+```
+
+<!-- read if you are not getting -->
+
+
+1. `let query = req.query.blogs;`: This line gets the search query from the user. The user enters their search term as a URL parameter, like `http://locahost:8090/blog/search?blogs=your_query`.
+
+2. `const blogs = await blog.find();`: It fetches a list of blogs from a database. Think of it as a collection of articles or posts.
+
+3. `const options = { keys: ["author", "category", "title"] };`: This line tells the program where to look for the search term. It searches for the query in the "author," "category," and "title" of the blogs.
+
+4. `const fuse = new Fuse(blogs, options);`: This sets up a search tool that uses the `options` to find results in the `blogs`.
+
+5. `const result = fuse.search(query);`: This performs the search. It looks for blogs that match the `query` (the user's search term) in the "author," "category," and "title" fields of the blogs. The `result` contains the matching blogs.
+
 
 ```js
 ## Testing Your Score

@@ -3,6 +3,7 @@ const isLogin = (req, res, next) => {
   if (id) {
     next();
   } else {
+    console.log("hiting");
     res.redirect("/user/login");
   }
 };
